@@ -1,26 +1,27 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+@media (max-width: 768px) {
+    #map {
+        height: 70vh; /* Disminuye un poco la altura para dispositivos móviles */
+    }
 
-#map {
-    height: 80vh; /* Ajusta la altura del mapa */
-    width: 100%; /* Ocupa todo el ancho */
-}
+    .controls {
+        top: auto;
+        bottom: 10px; /* Mueve los controles al fondo */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%; /* Más ancho en dispositivos móviles */
+        padding: 15px;
+        box-sizing: border-box;
+    }
 
-.controls {
-    position: absolute;
-    top: 10px; /* Asegúrate de que esté a la vista */
-    left: 10px;
-    background: white;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
-    z-index: 1000; /* Asegura que el contenedor esté por encima del mapa */
-}
+    .controls input {
+        width: 100%; /* Ajusta el ancho del input */
+        margin-bottom: 10px;
+        padding: 10px;
+    }
 
-.controls input {
-    margin-bottom: 10px;
-    width: 200px; /* Ancho de los inputs */
+    .controls button {
+        width: 100%; /* Los botones ocupan el ancho completo */
+        padding: 10px;
+        font-size: 16px;
+    }
 }
