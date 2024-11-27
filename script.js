@@ -10,7 +10,7 @@ function initMap() {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Inicializar el control de rutas con una configuración básica
+    // Inicializar el control de rutas con configuración básica
     routingControl = L.Routing.control({
         waypoints: [], // Inicialmente vacío
         routeWhileDragging: false, // No permitir arrastrar rutas
@@ -83,7 +83,14 @@ function searchRoute() {
                 const routeCoordinates = route.points.coordinates.map(coord => [coord[1], coord[0]]); // Convertir a [lat, lng]
 
                 // Actualizar los waypoints del control de rutas
-                routingControl.setWaypoints(routeCoordinates.map(coord => L.latLng(coord[0], coord[1])));
+                routingControl.setWaypoints([
+                    L.latLng(userLocation.lat, userLocation.lng),
+                    ...routeCoordinates.map(coord => L.latLng(coord[0], coord[1]))
+                ]);
+
+                // Ajustar la vista del mapa para incluir toda la ruta
+                const bounds = L.latLngBounds(routeCoordinates.map(coord => L.latLng(coord[0], coord[1])));
+                map.fitBounds(bounds);
             } else {
                 alert("No se encontró ninguna ruta.");
             }
@@ -96,6 +103,7 @@ function searchRoute() {
 
 function clearRoute() {
     routingControl.setWaypoints([]); // Limpia los waypoints del control de rutas
+    map.setView(userLocation, 13); // Vuelve a centrar el mapa en la ubicación del usuario
 }
 
 // Inicializar el mapa al cargar la página
